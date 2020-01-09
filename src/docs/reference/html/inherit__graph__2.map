@@ -1,0 +1,6 @@
+<area shape="rect" href="$classCairo_1_1FontFace.html" title="A FontFace represents a particular font at a particular weight, slant, and other..." alt="" coords="5,107,120,133">
+<area shape="rect" href="$classCairo_1_1FtFontFace.html" title="Cairo::FtFontFace" alt="" coords="183,5,308,32">
+<area shape="rect" href="$classCairo_1_1QuartzFontFace.html" title="Font support for Quartz (CGFont) fonts on OS X." alt="" coords="169,56,321,83">
+<area shape="rect" href="$classCairo_1_1ToyFontFace.html" title="A simple font face used for the cairo &#39;toy&#39; font API." alt="" coords="177,107,313,133">
+<area shape="rect" href="$classCairo_1_1UserFontFace.html" title="Font support with font data provided by the user." alt="" coords="175,157,316,184">
+<area shape="rect" href="$classCairo_1_1Win32FontFace.html" title="Font support for Microsoft Windows." alt="" coords="171,208,320,235">

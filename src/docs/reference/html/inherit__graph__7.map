@@ -1,0 +1,3 @@
+<area shape="rect" href="$classCairo_1_1ScaledFont.html" title="A ScaledFont is a font scaled to a particular size and device resolution." alt="" coords="5,31,131,57">
+<area shape="rect" href="$classCairo_1_1FtScaledFont.html" title="Cairo::FtScaledFont" alt="" coords="192,5,328,32">
+<area shape="rect" href="$classCairo_1_1Win32ScaledFont.html" title="Scaled Font implementation for Microsoft Windows fonts." alt="" coords="180,56,340,83">

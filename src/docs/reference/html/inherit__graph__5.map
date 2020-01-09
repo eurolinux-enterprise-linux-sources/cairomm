@@ -1,0 +1,6 @@
+<area shape="rect" href="$classCairo_1_1Pattern.html" title="This is a reference&#45;counted object that should be used via Cairo::RefPtr." alt="" coords="5,81,107,108">
+<area shape="rect" href="$classCairo_1_1Gradient.html" title="Cairo::Gradient" alt="" coords="175,31,281,57">
+<area shape="rect" href="$classCairo_1_1SolidPattern.html" title="Cairo::SolidPattern" alt="" coords="163,81,293,108">
+<area shape="rect" href="$classCairo_1_1SurfacePattern.html" title="Cairo::SurfacePattern" alt="" coords="155,132,301,159">
+<area shape="rect" href="$classCairo_1_1LinearGradient.html" title="Cairo::LinearGradient" alt="" coords="349,5,493,32">
+<area shape="rect" href="$classCairo_1_1RadialGradient.html" title="Cairo::RadialGradient" alt="" coords="349,56,493,83">
