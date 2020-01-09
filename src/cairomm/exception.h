@@ -22,6 +22,11 @@
 #include <cairomm/enums.h>
 #include <stdexcept>
 
+#if defined(_MSC_VER) && (_MSC_VER < 1900)
+#define _ALLOW_KEYWORD_MACROS 1
+#define noexcept _NOEXCEPT
+#endif
+
 namespace Cairo
 {
 
@@ -31,9 +36,9 @@ class logic_error: public std::logic_error
 {
 public:
   explicit logic_error(ErrorStatus status);
-  virtual ~logic_error() throw();
+  virtual ~logic_error() noexcept;
 
-  //virtual const char* what() const throw();
+  //virtual const char* what() const noexcept;
   ErrorStatus get_status_code() const;
 
 private:

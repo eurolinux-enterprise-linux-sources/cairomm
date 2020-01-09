@@ -25,14 +25,6 @@
 #include <cairomm/types.h>
 #include <cairomm/refptr.h>
 
-/* following is required for OS X */
-
-#ifdef nil
-#undef nil
-#endif
-
-/* end OS X */
-
 #include <cairo.h>
 #ifdef CAIRO_HAS_FT_FONT
 #include <cairo-ft.h>
@@ -66,6 +58,8 @@ public:
    */
   explicit FontFace(cairo_font_face_t* cobject, bool has_reference = false);
 
+  FontFace(const FontFace&) = delete;
+  FontFace& operator=(const FontFace&) = delete;
 
   virtual ~FontFace();
 
@@ -75,6 +69,9 @@ public:
   void set_user_data(const cairo_user_data_key_t *key, void *user_data, cairo_destroy_func_t destroy);
   */
 
+  /**
+   * Returns the type of the backend used to create a font face
+   */
   FontType get_type() const;
 
   typedef cairo_font_face_t cobject;
@@ -93,10 +90,6 @@ public:
 protected:
 
   cobject* m_cobject;
-
-private:
-  FontFace(const FontFace&);
-  FontFace& operator=(const FontFace&);
 };
 
 
@@ -195,7 +188,7 @@ protected:
  *
  * @code
  * {
- *   Cairo::RefPtr<MyUserFont> face = MyUserFont::create();
+ *   auto face = MyUserFont::create();
  *   cr->set_font_face(face);
  * }  // scope for demonstration purposes
  *
@@ -443,6 +436,7 @@ public:
   static RefPtr<FtFontFace> create(FT_Face face, int load_flags);
   //TODO: Add a suitable default value for load_flags?
 
+#ifdef CAIRO_HAS_FC_FONT
   /** Creates a new font face for the FreeType font backend based on a
    * fontconfig pattern. This font can then be used with Context::set_font_face()
    * or FtScaledFont::create().
@@ -472,10 +466,35 @@ public:
    * @since 1.8
    */
   static RefPtr<FtFontFace> create(FcPattern* pattern);
+#endif // CAIRO_HAS_FC_FONT
+
+  /** Sets synthesis options to control how FreeType renders the glyphs for a
+   * particular font face. The given options are ORed with the currently active
+   * options.
+   *
+   * @param synth_flags A set of synthesis options to enable
+   * @since 1.12
+   */
+  void set_synthesize(FtSynthesize synth_flags);
+
+  /** Unsets the specified FreeType glypth synthesis options
+   *
+   * @param synth_flags A set of synthesis options to disable
+   * @since 1.12
+   */
+  void unset_synthesize(FtSynthesize synth_flags);
+
+  /** Returns currently activy FreeType glyph synthesis options
+   *
+   * @since 1.12
+   */
+  FtSynthesize get_synthesize() const;
 
 protected:
   FtFontFace(FT_Face face, int load_flags);
+#ifdef CAIRO_HAS_FC_FONT
   FtFontFace(FcPattern* pattern);
+#endif // CAIRO_HAS_FC_FONT
 };
 
 #endif // CAIRO_HAS_FT_FONT

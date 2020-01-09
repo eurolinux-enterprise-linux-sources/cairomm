@@ -29,7 +29,11 @@
 namespace Cairo
 {
 
-/** How a font should be rendered.
+/**
+ * The font options specify how fonts should be rendered.  Most of the
+ * time the font options implied by a surface are just right and do not
+ * need any changes, but for pixel-based targets tweaking font options
+ * may result in superior output on a particular display.
  */
 class FontOptions
 {
@@ -80,9 +84,10 @@ public:
 
   /**
    * Sets the subpixel order for the font options object. The subpixel order
-   * specifies the order of color elements within each pixel on the display device
-   * when rendering with an antialiasing mode of ANTIALIAS_SUBPIXEL. See the
-   * documentation for SubpixelOrder for full details.
+   * specifies the order of color elements within each pixel on the display
+   * device when rendering with an antialiasing mode of
+   * Cairo::ANTIALIAS_SUBPIXEL. See the documentation for SubpixelOrder for
+   * full details.
    *
    * @param subpixel_order the new subpixel order.
    **/
@@ -133,6 +138,7 @@ public:
   HintMetrics get_hint_metrics() const;
 
 #ifdef CAIRO_HAS_FT_FONT
+#ifdef CAIRO_HAS_FC_FONT
   /** Add options to a FcPattern based on a cairo_font_options_t font options
    * object. Options that are already in the pattern, are not overridden, so you
    * should call this function after calling FcConfigSubstitute() (the user's
@@ -144,6 +150,7 @@ public:
    * @since 1.8
    */
   void substitute(FcPattern* pattern);
+#endif // CAIRO_HAS_FC_FONT
 #endif // CAIRO_HAS_FT_FONT
 
   typedef cairo_font_options_t cobject;

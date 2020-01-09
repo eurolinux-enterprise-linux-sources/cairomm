@@ -1,17 +1,24 @@
 %global apiver 1.0
-%define cairover 1.10.0
 
-Summary:          C++ API for the cairo graphics library
-Name:             cairomm
-Version:          1.10.0
-Release:          8%{?dist}
-URL:              http://www.cairographics.org
-License:          LGPLv2+
-Group:            System Environment/Libraries
-Source:           http://www.cairographics.org/releases/%{name}-%{version}.tar.gz
-BuildRequires:    cairo-devel >= %{cairover}
-BuildRequires:    pkgconfig
-BuildRequires:    libsigc++20-devel
+%global cairo_version 1.10.0
+%global libsigc_version 2.5.1
+
+Summary:        C++ API for the cairo graphics library
+Name:           cairomm
+Version:        1.12.0
+Release:        1%{?dist}
+URL:            http://www.cairographics.org
+License:        LGPLv2+
+Group:          System Environment/Libraries
+Source:         http://www.cairographics.org/releases/%{name}-%{version}.tar.gz
+BuildRequires:  cairo-devel >= %{cairo_version}
+BuildRequires:  libsigc++20-devel >= %{libsigc_version}
+BuildRequires:  perl
+BuildRequires:  perl(Getopt::Long)
+BuildRequires:  pkgconfig
+
+Requires:       cairo%{?_isa} >= %{cairo_version}
+Requires:       libsigc++20%{?_isa} >= %{libsigc_version}
 
 %description
 Cairomm is the C++ API for the cairo graphics library. It offers all the power
@@ -21,9 +28,7 @@ Standard Template Library where it makes sense.
 %package        devel
 Summary:        Headers for developing programs that will use %{name}
 Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
-Requires:       cairo-devel >= %{cairover}
-Requires:       libsigc++20-devel
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description    devel
 Cairomm is the C++ API for the cairo graphics library. It offers all the power
@@ -58,7 +63,7 @@ hierarchy and can be found at /usr/share/doc/cairomm-1.0
 make %{?_smp_mflags}
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
+%make_install
 find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
 %post -p /sbin/ldconfig
@@ -66,7 +71,8 @@ find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 %postun -p /sbin/ldconfig
 
 %files
-%doc AUTHORS COPYING README NEWS
+%license COPYING
+%doc AUTHORS README NEWS
 %{_libdir}/lib*.so.*
 
 %files devel
@@ -81,6 +87,10 @@ find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 %doc %{_datadir}/devhelp/
 
 %changelog
+* Tue Sep 22 2015 Kalev Lember <klember@redhat.com> - 1.12.0-1
+- Update to 1.12.0
+- Resolves: #1425909
+
 * Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 1.10.0-8
 - Mass rebuild 2014-01-24
 
